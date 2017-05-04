@@ -48,3 +48,91 @@ import { reducer } from 'resolve-projection'
 export default reducer(counters)
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const projection = {
+	initialState: () => Immutable({}),
+
+	eventHandlers: {
+		[EventTypes.SOME_EVENT]: (state, event) => state.someOperation(),
+		//...
+	},
+
+	findBy: {
+		id: true,
+		cursor: true,
+		all: false,
+		'myKey1 myKey2': true
+	}
+}
+
+
+
+const driver =  require('resolve-projection-memory')()
+
+const instanceProjection = require('resolve-projection')({ projection, driver, store, bus }) //server-side
+
+
+const instanceProjection = require('resolve-projection')({ projection }) //client-side
+
+
+
+instanceProjection.toReducer() //only client-side
+
+instanceProjection.getHandledEvents() //only server-side
+
+instanceProjection.getGraphQLResolver() //only server-side
+
+instanceProjection.getRestAPIResolver() //only server-side
+
+instanceProjection.find({ after: ID, first: Int, sortBy: String = 'id'  })
+
+instanceProjection.find({ id: ID })
+
+instanceProjection.find()
+
+
+
+
+
+
+
+
+
+
+
+//See Pagination, Cursor-Based http://dev.apollodata.com/react/pagination.html
+
+//See getQueryResolver
+https://github.com/apollographql/graphql-anywhere
+
+
+
+
+
+
+
+	query: [
+		'id',
+		'after first sortBy',
+		'myKey1 myKey2',
+	],
