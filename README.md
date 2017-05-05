@@ -99,7 +99,7 @@ export default ({ store, bus, projection, driver = projectionInMemory}) => {/*..
 ```
 ### resolve-projection 
 ```js
-   export reducer() {
+   export function reducer() {
       const reducer = (state = projection.initialState(), action) => {
          const eventHandler = projection.eventHandlers[action.type]
          if(eventHandler) {
@@ -110,10 +110,11 @@ export default ({ store, bus, projection, driver = projectionInMemory}) => {/*..
       return reducer
    }
    
-   export saga() {
+   export function* saga() {
       //...
    }
    
-   export find(query) {
+   export function find(query) {
+      //...
    }
 ```
