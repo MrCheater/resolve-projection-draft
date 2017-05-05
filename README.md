@@ -43,8 +43,6 @@ const queries = query({
 
 const queries = resolveQuery({projections, store, bus, driver})
 
-console.log(queries.getHandledEvents()) //COUNTER_CREATE, COUNTER_INCREMENT, COUNTER_DECREMENT
-
 const app = express()
 
 const graphQLResolver = queries.getGraphQLResolver() //See getQueryResolver https://github.com/apollographql/graphql-anywhere
