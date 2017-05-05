@@ -68,7 +68,7 @@ app.get('/api/*', (req, res) =>
 		result => res.json(result)
 	)
 );
-//fetch('/api/counters/') // Not work. option "all" disabled 
+//fetch(`/api/counters/`) // Not work. option "all" disabled 
 //fetch(`/api/counters/${id}`)
 //fetch(`/api/counters?limit=10`)
 //fetch(`/api/counters?after=${id}&limit=10`)
