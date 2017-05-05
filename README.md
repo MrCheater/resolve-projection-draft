@@ -30,6 +30,7 @@ import projectionInMemory from 'resolve-projection-memory'
 import projections from './projections/'
 import resolveQuery from 'resolve-query';
 import express from 'express'
+import gql from 'graphql-tag'
 
 const eventStore = /*...*/
 const eventBus = /*...*/
