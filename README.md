@@ -1,7 +1,7 @@
 # resolve-projection + resolve-query [draft]
 
-# Server-Side
-## Declaration Projection
+## Server-Side
+### Declaration Projection
 ```js
 // ./projections/counters.js
 import * as EventTypes from '../eventTypes.js'
@@ -24,7 +24,7 @@ export default {
 }
 ```
 
-## Startup Projections and Query Side
+### Startup Projections and Query Side
 ```js
 import projectionInMemory from 'resolve-projection-memory'
 import projections from './projections/'
@@ -78,8 +78,8 @@ app.get('/api/*', (req, res) =>
 app.listen(80)
 ```
 
-# Client-Side
-## Reducer
+## Client-Side
+### Reducer
 ```js
 // ./reducers/counters.js
 
@@ -90,14 +90,14 @@ export default reducer(counters)
 
 ```
 
-# API
-## resolve-query 
+## API
+### resolve-query 
 ```js
 import projectionInMemory from 'resolve-projection-memory'
 
 export default ({ store, bus, projection, driver = projectionInMemory}) => {/*...*/}
 ```
-## resolve-projection 
+### resolve-projection 
 ```js
    export reducer() {
       const reducer = (state = projection.initialState(), action) => {
