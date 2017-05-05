@@ -24,18 +24,62 @@ export default {
 }
 ```
 
-## Startup Projection
-import resolveProjection from 'resolve-projection'
+## Startup Projections and Query Side
+```js
+import projectionInMemory from 'resolve-projection-memory'
 import projections from './projections/'
+import resolveQuery from 'resolve-query';
+import express from 'express'
 
-const startupProjections = {};
-for(let projectionName in projections) {
-	startupProjections[projectionName] = resolveProjection({
-		projection: projections[projectionName],
-		
-	})
-}
+const eventStore = /*...*/
+const eventBus = /*...*/
 
+const queries = query({
+	store: eventStore,
+	bus: eventBus,
+	projections,
+	driver: projectionInMemory
+});
+
+const queries = resolveQuery({projections, store, bus, driver})
+
+console.log(queries.getHandledEvents()) //COUNTER_CREATE, COUNTER_INCREMENT, COUNTER_DECREMENT
+
+const app = express()
+
+const graphQLResolver = queries.getGraphQLResolver()
+app.get('/api/graphql/*', (req, res) =>
+	const query = gql`${req.params[0]}`
+
+	graphQLResolver(query).then(
+		result => res.json(result)
+	)
+);
+//fetch('/api/qraphql/{counters}') // Not work. option "all" disabled 
+//fetch(`/api/qraphql/{counters(id: "${id}")}`)
+//fetch(`/api/qraphql/{counters(limit: 10)}`)
+//fetch(`/api/qraphql/?after=${id}&limit=10`)
+//fetch(`/api/counters?limit=10&sortBy=value`)
+//fetch(`/api/counters?after=${id}&limit=10&sortBy=value`)
+
+
+const restAPIResolver = queries.getRestAPIResolver()
+app.get('/api/*', (req, res) =>
+	const query = req.params[0]
+
+	restAPIResolver(query).then(
+		result => res.json(result)
+	)
+);
+//fetch('/api/counters/') // Not work. option "all" disabled 
+//fetch(`/api/counters/${id}`)
+//fetch(`/api/counters?limit=10`)
+//fetch(`/api/counters?after=${id}&limit=10`)
+//fetch(`/api/counters?limit=10&sortBy=value`)
+//fetch(`/api/counters?after=${id}&limit=10&sortBy=value`)
+
+app.listen(80)
+```
 
 # Client-Side
 ## Reducer
@@ -111,28 +155,7 @@ instanceProjection.find({ id: ID })
 instanceProjection.find()
 
 
-
-
-
-
-
-
-
-
-
 //See Pagination, Cursor-Based http://dev.apollodata.com/react/pagination.html
 
 //See getQueryResolver
 https://github.com/apollographql/graphql-anywhere
-
-
-
-
-
-
-
-	query: [
-		'id',
-		'after first sortBy',
-		'myKey1 myKey2',
-	],
