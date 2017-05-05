@@ -34,14 +34,12 @@ import express from 'express'
 const eventStore = /*...*/
 const eventBus = /*...*/
 
-const queries = query({
+const queries = resolveQuery({
 	store: eventStore,
 	bus: eventBus,
 	projections,
 	driver: projectionInMemory
 });
-
-const queries = resolveQuery({projections, store, bus, driver})
 
 const app = express()
 
