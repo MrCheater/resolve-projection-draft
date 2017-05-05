@@ -7,20 +7,20 @@
 import * as EventTypes from '../eventTypes.js'
 
 export default {
-	initialState: () => Immutable({}),
+   initialState: () => Immutable({}),
 
-	eventHandlers: {
-		[EventTypes.COUNTER_CREATE]: (state, event) => state.set(event.aggregateId, {value: 0}),
-		[EventTypes.COUNTER_INCREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value + 1) ),
-		[EventTypes.COUNTER_DECREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value - 1) ),
-	},
+   eventHandlers: {
+      [EventTypes.COUNTER_CREATE]: (state, event) => state.set(event.aggregateId, {value: 0}),
+      [EventTypes.COUNTER_INCREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value + 1) ),
+      [EventTypes.COUNTER_DECREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value - 1) ),
+   },
 
-	query: {
-		id: true,
-		cursor: true,
-		all: false,
-		'value': true
-	}
+   query: {
+      id: true,
+      cursor: true,
+      all: false,
+      'value': true
+   }
 }
 ```
 
@@ -36,21 +36,21 @@ const eventStore = /*...*/
 const eventBus = /*...*/
 
 const queries = resolveQuery({
-	store: eventStore,
-	bus: eventBus,
-	projections,
-	driver: projectionInMemory
+   store: eventStore,
+   bus: eventBus,
+   projections,
+   driver: projectionInMemory
 });
 
 const app = express()
 
 const graphQLResolver = queries.getGraphQLResolver() //See getQueryResolver https://github.com/apollographql/graphql-anywhere
 app.get('/api/graphql/*', (req, res) =>
-	const query = gql`${req.params[0]}`
+   const query = gql`${req.params[0]}`
 
-	graphQLResolver(query).then(
-		result => res.json(result)
-	)
+   graphQLResolver(query).then(
+      result => res.json(result)
+   )
 );
 //fetch(`/api/qraphql/{counters}`) // Not work. option "all" disabled 
 //fetch(`/api/qraphql/{counters(id:"${id}")}`)
@@ -62,11 +62,11 @@ app.get('/api/graphql/*', (req, res) =>
 
 const restAPIResolver = queries.getRestAPIResolver() 
 app.get('/api/*', (req, res) =>
-	const query = req.params[0]
+   const query = req.params[0]
 
-	restAPIResolver(query).then(
-		result => res.json(result)
-	)
+   restAPIResolver(query).then(
+      result => res.json(result)
+   )
 );
 //fetch(`/api/counters/`) // Not work. option "all" disabled 
 //fetch(`/api/counters/${id}`)
