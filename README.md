@@ -55,12 +55,12 @@ app.get('/api/graphql/*', (req, res) =>
 		result => res.json(result)
 	)
 );
-//fetch('/api/qraphql/{counters}') // Not work. option "all" disabled 
-//fetch(`/api/qraphql/{counters(id: "${id}")}`)
-//fetch(`/api/qraphql/{counters(limit: 10)}`)
-//fetch(`/api/qraphql/?after=${id}&limit=10`)
-//fetch(`/api/counters?limit=10&sortBy=value`)
-//fetch(`/api/counters?after=${id}&limit=10&sortBy=value`)
+//fetch(`/api/qraphql/{counters}`) // Not work. option "all" disabled 
+//fetch(`/api/qraphql/{counters(id:"${id}")}`)
+//fetch(`/api/qraphql/{counters(limit:10)}`)
+//fetch(`/api/qraphql/{counters(after:"${id}" limit:10)}`)
+//fetch(`/api/qraphql/{counters(limit:10 sortBy="value")}`)
+//fetch(`/api/qraphql/{counters(after:"${id}" limit:10 sortBy="value")}`)
 
 
 const restAPIResolver = queries.getRestAPIResolver()
