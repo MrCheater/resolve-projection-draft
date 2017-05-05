@@ -1,4 +1,4 @@
-# resolve-projection-draft
+# resolve-projection + resolve-query [draft]
 
 # Server-Side
 ## Declaration Projection
@@ -90,6 +90,30 @@ export default reducer(counters)
 
 ```
 
+# API
+##resolve-query 
+```js
+import projectionInMemory from 'resolve-projection-memory'
 
-
-
+export default ({ store, bus, projection, driver = projectionInMemory}) => {/*...*/}
+```
+##resolve-projection 
+```js
+   export reducer() {
+      const reducer = (state = projection.initialState(), action) => {
+         const eventHandler = projection.eventHandlers[action.type]
+         if(eventHandler) {
+            return eventHandler(state, action)
+         }
+         return state
+      }
+      return reducer
+   }
+   
+   export saga() {
+      //...
+   }
+   
+   export find(query) {
+   }
+```
