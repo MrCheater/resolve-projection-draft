@@ -57,7 +57,9 @@ app.get('/api/graphql/*', (req, res) =>
 //fetch(`/api/qraphql/{counters(limit:10)}`)
 //fetch(`/api/qraphql/{counters(after:"${id}" limit:10)}`)
 //fetch(`/api/qraphql/{counters(limit:10 sortBy="value")}`)
-//fetch(`/api/qraphql/{counters(after:"${id}" limit:10 sortBy="value")}`) //See Pagination, Cursor-Based http://dev.apollodata.com/react/pagination.html
+//fetch(`/api/qraphql/{counters(after:"${id}" limit:10 sortBy="value")}`) //See Pagination, Cursor-Based 
+http://dev.apollodata.com/react/pagination.html
+//fetch(`/api/qraphql/{counters(value:42)}`)
 
 
 const restAPIResolver = queries.getRestAPIResolver() 
@@ -74,6 +76,7 @@ app.get('/api/*', (req, res) =>
 //fetch(`/api/counters?after=${id}&limit=10`)
 //fetch(`/api/counters?limit=10&sortBy=value`)
 //fetch(`/api/counters?after=${id}&limit=10&sortBy=value`) 
+//fetch(`/api/counters?value=10`)
 
 app.listen(80)
 ```
