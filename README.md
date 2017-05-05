@@ -98,7 +98,7 @@ export default reducer(counters)
 ```js
 import projectionInMemory from 'resolve-projection-memory'
 
-export default ({ store, bus, projection, driver = projectionInMemory}) => {/*...*/}
+export default ({ store, bus, projection, driver = projectionInMemory}) => ({/*...*/}) : <{ find: function(query) {/*...*/}}>
 ```
 ### resolve-projection 
 ```js
