@@ -114,5 +114,7 @@ export default ({ store, bus, projection, driver = projectionInMemory}) => ({/*.
    
    export function* saga() {
       //...
+      //Fetch projections
+      //Update reducers
    }
 ```
