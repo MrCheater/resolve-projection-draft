@@ -91,13 +91,13 @@ export default reducer(counters)
 ```
 
 # API
-##resolve-query 
+## resolve-query 
 ```js
 import projectionInMemory from 'resolve-projection-memory'
 
 export default ({ store, bus, projection, driver = projectionInMemory}) => {/*...*/}
 ```
-##resolve-projection 
+## resolve-projection 
 ```js
    export reducer() {
       const reducer = (state = projection.initialState(), action) => {
