@@ -15,7 +15,7 @@ export default {
 		[EventTypes.COUNTER_DECREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value - 1) ),
 	},
 
-	findBy: {
+	query: {
 		id: true,
 		cursor: true,
 		all: false,
@@ -47,7 +47,7 @@ console.log(queries.getHandledEvents()) //COUNTER_CREATE, COUNTER_INCREMENT, COU
 
 const app = express()
 
-const graphQLResolver = queries.getGraphQLResolver()
+const graphQLResolver = queries.getGraphQLResolver() //See getQueryResolver https://github.com/apollographql/graphql-anywhere
 app.get('/api/graphql/*', (req, res) =>
 	const query = gql`${req.params[0]}`
 
@@ -60,10 +60,10 @@ app.get('/api/graphql/*', (req, res) =>
 //fetch(`/api/qraphql/{counters(limit:10)}`)
 //fetch(`/api/qraphql/{counters(after:"${id}" limit:10)}`)
 //fetch(`/api/qraphql/{counters(limit:10 sortBy="value")}`)
-//fetch(`/api/qraphql/{counters(after:"${id}" limit:10 sortBy="value")}`)
+//fetch(`/api/qraphql/{counters(after:"${id}" limit:10 sortBy="value")}`) //See Pagination, Cursor-Based http://dev.apollodata.com/react/pagination.html
 
 
-const restAPIResolver = queries.getRestAPIResolver()
+const restAPIResolver = queries.getRestAPIResolver() 
 app.get('/api/*', (req, res) =>
 	const query = req.params[0]
 
@@ -76,7 +76,7 @@ app.get('/api/*', (req, res) =>
 //fetch(`/api/counters?limit=10`)
 //fetch(`/api/counters?after=${id}&limit=10`)
 //fetch(`/api/counters?limit=10&sortBy=value`)
-//fetch(`/api/counters?after=${id}&limit=10&sortBy=value`)
+//fetch(`/api/counters?after=${id}&limit=10&sortBy=value`) 
 
 app.listen(80)
 ```
@@ -96,66 +96,3 @@ export default reducer(counters)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const projection = {
-	initialState: () => Immutable({}),
-
-	eventHandlers: {
-		[EventTypes.SOME_EVENT]: (state, event) => state.someOperation(),
-		//...
-	},
-
-	findBy: {
-		id: true,
-		cursor: true,
-		all: false,
-		'myKey1 myKey2': true
-	}
-}
-
-
-
-const driver =  require('resolve-projection-memory')()
-
-const instanceProjection = require('resolve-projection')({ projection, driver, store, bus }) //server-side
-
-
-const instanceProjection = require('resolve-projection')({ projection }) //client-side
-
-
-
-instanceProjection.toReducer() //only client-side
-
-instanceProjection.getHandledEvents() //only server-side
-
-instanceProjection.getGraphQLResolver() //only server-side
-
-instanceProjection.getRestAPIResolver() //only server-side
-
-instanceProjection.find({ after: ID, first: Int, sortBy: String = 'id'  })
-
-instanceProjection.find({ id: ID })
-
-instanceProjection.find()
-
-
-//See Pagination, Cursor-Based http://dev.apollodata.com/react/pagination.html
-
-//See getQueryResolver
-https://github.com/apollographql/graphql-anywhere
