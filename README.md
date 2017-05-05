@@ -115,8 +115,4 @@ export default ({ store, bus, projection, driver = projectionInMemory}) => ({/*.
    export function* saga() {
       //...
    }
-   
-   export function find(query) {
-      //...
-   }
 ```
