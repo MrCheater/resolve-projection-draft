@@ -15,10 +15,8 @@ export default {
       [EventTypes.COUNTER_DECREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value - 1) ),
    },
 
-   query: {
-      id: true,
-      cursor: true,
-      all: false,
+   findBy: {
+      id: true,   
       'value': true
    }
 }
