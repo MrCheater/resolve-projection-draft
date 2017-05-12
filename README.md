@@ -98,22 +98,3 @@ import projectionInMemory from 'resolve-projection-memory'
 
 export default ({ store, bus, projection, driver = projectionInMemory}) => ({/*...*/})
 ```
-### resolve-projection 
-```js
-   export function reducer() {
-      const reducer = (state, action) => {
-         const eventHandler = projection.eventHandlers[action.type]
-         if(eventHandler) {
-            return eventHandler(state, action)
-         }
-         return state
-      }
-      return reducer
-   }
-   
-   export function* saga() {
-      //...
-      //Fetch projections
-      //Update reducers
-   }
-```
