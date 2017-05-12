@@ -15,10 +15,11 @@ export default {
       [EventTypes.COUNTER_DECREMENT]: (state, event) => state.update( event.aggregateId, (counter) => counter.set('value', count.value - 1) ),
    },
 
-   findBy: {
-      id: true,   
-      'value': true
-   }
+   findBy: [
+      'id',   
+      'value',
+      ['id', 'value']
+   ]
 }
 ```
 
